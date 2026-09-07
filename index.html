@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDGLOGEXPRESS | Moto-frete rápido em São Paulo</title>
+<meta name="theme-color" content="#0d1724">
+<meta property="og:title" content="RDGLOGEXPRESS — Seu frete calculado na hora">
+<meta property="og:description" content="Calcule sua rota e chame um motoboy da RDGLOGEXPRESS pelo WhatsApp.">
+<meta name="description" content="Serviço de moto-frete e transporte particular rápido e seguro em São Paulo, ABC, Interior e Litoral. Calcule ou consulte o valor da sua corrida na hora.">
+<meta name="contact" content="marques.dev01@outlook.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-base: #0a0d12;
+    --surface: rgba(22, 27, 36, 0.75);
+    --surface-solid: #161b24;
+    --surface-2: rgba(30, 38, 51, 0.85);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 176, 32, 0.4);
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #ffb020;
+    --accent-grad: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+    --accent-hover: linear-gradient(135deg, #ffd043 0%, #ffa000 100%);
+    --accent-dim: rgba(255, 176, 32, 0.12);
+    --live: #10b981;
+    --urgent: #ef4444;
+    --radius: 20px;
+    --shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: var(--bg-base);
+    background-image: 
+      radial-gradient(circle at 15% 20%, rgba(255, 176, 32, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(255, 140, 0, 0.06) 0%, transparent 50%);
+    background-attachment: fixed;
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Big Shoulders Display',sans-serif; font-weight:800; letter-spacing:0.02em; text-transform:uppercase;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  .wrap{max-width:960px; margin:0 auto; padding:0 20px;}
+
+  /* HEADER & NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10, 13, 18, 0.8);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 20px;}
+  .logo{display:flex; align-items:baseline; gap:3px; font-size:24px; text-shadow:0 0 20px rgba(255,176,32,0.3);}
+  .logo b{color:var(--accent);}
+  .nav-links{display:flex; align-items:center; gap:24px;}
+  .nav-links a{font-size:14px; color:var(--text-muted); transition:color .15s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.tag{
+    color:#111; background:var(--accent-grad); padding:9px 20px; border-radius:999px;
+    font-weight:700; font-size:13px; transition:all .2s ease;
+    box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3);
+  }
+  .nav-links a.tag:hover{transform:translateY(-2px); box-shadow: 0 6px 20px rgba(255, 176, 32, 0.4);}
+  
+  .wa-btn{
+    display:flex; align-items:center; gap:8px;
+    background:var(--surface); border:1px solid var(--border); color:var(--text);
+    padding:9px 18px; border-radius:999px; font-size:13px; font-weight:600;
+    backdrop-filter:blur(10px);
+    transition:all .2s ease;
+  }
+  .wa-btn:hover{border-color:var(--accent); background:var(--accent-dim); transform:translateY(-1px);}
+
+  /* HERO */
+  .hero{padding:72px 0 56px; border-bottom:1px solid var(--border);}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em;
+    color:var(--accent); text-transform:uppercase; margin-bottom:18px;
+    background:var(--accent-dim); padding:6px 14px; border-radius:999px; border:1px solid rgba(255,176,32,0.25);
+    box-shadow: 0 0 15px rgba(255,176,32,0.1);
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--live); box-shadow:0 0 10px var(--live);}
+  h1{
+    font-size:clamp(42px, 7.5vw, 68px); line-height:0.95; margin:0 0 20px; max-width:12ch;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  h1 em{
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style:normal;
+  }
+  .hero p{color:var(--text-muted); font-size:18px; max-width:48ch; margin:0 0 32px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 26px; border-radius:12px; font-weight:600; font-size:15px;
+    border:1px solid transparent; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn-primary{
+    background:var(--accent-grad); color:#111; font-weight:700;
+    box-shadow:0 4px 20px rgba(255,176,32,0.3);
+  }
+  .btn-primary:hover{background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 6px 24px rgba(255,176,32,0.45);}
+  .btn-ghost{
+    border-color:var(--border); color:var(--text); background:var(--surface);
+    backdrop-filter:blur(10px);
+  }
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-dim);}
+
+  /* SECTION LABELS */
+  .section{padding:64px 0; border-bottom:1px solid var(--border);}
+  .label{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent);
+    letter-spacing:.08em; text-transform:uppercase; margin:0 0 8px; display:block;
+  }
+  h2{font-size:clamp(28px,4vw,40px); margin:0 0 8px;}
+  .section-sub{color:var(--text-muted); font-size:15px; margin:0 0 36px; max-width:54ch;}
+
+  /* CALCULATOR CARD */
+  .calc-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; box-shadow:var(--shadow);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .mode-tabs{
+    display:flex; gap:8px; padding:12px 16px; background:rgba(0,0,0,0.2);
+    border-bottom:1px solid var(--border);
+  }
+  .mode-tab{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+    background:transparent; border:1px solid var(--border); color:var(--text-muted);
+    padding:12px 14px; border-radius:12px; font-family:'JetBrains Mono',monospace;
+    font-size:13px; font-weight:600; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .mode-tab svg{width:18px; height:18px; flex-shrink:0;}
+  .mode-tab.active{border-color:var(--accent); color:var(--accent); background:var(--accent-dim); box-shadow:0 0 15px rgba(255,176,32,0.15);}
+  .mode-tab:not(.active):hover{color:var(--text); border-color:rgba(255,255,255,0.2);}
+
+  .route{
+    display:flex; align-items:center; gap:12px; padding:18px 24px;
+    border-bottom:1px solid var(--border); background:rgba(0,0,0,0.15);
+  }
+  .pin{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+  .pin.origin{background:var(--live); box-shadow:0 0 10px var(--live);}
+  .pin.dest{background:var(--accent); box-shadow:0 0 10px var(--accent);}
+  .route-line{
+    flex:1; height:0; border-top:2px dashed var(--border); position:relative; overflow:hidden;
+  }
+  .route-line::after{
+    content:''; position:absolute; inset:0; border-top:2px dashed var(--accent);
+    animation:travel 2.2s linear infinite;
+  }
+  @keyframes travel{
+    0%{clip-path:inset(0 100% 0 0);}
+    50%{clip-path:inset(0 0 0 0);}
+    100%{clip-path:inset(0 0 0 100%);}
+  }
+  .route-label{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-muted); white-space:nowrap;}
+
+  .calc-body{padding:28px;}
+  
+  /* ADDRESS FIELDS */
+  .addr-field{margin-bottom:18px;}
+  .route-helper{font-size:12px;color:var(--text-muted);margin:-8px 0 20px;padding-left:2px;}
+  .addr-field label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;
+  }
+  .addr-input-wrap{position:relative;}
+  .addr-input-wrap input[type=text]{
+    width:100%; background:var(--surface-2); border:1px solid var(--border); color:var(--text);
+    padding:14px 40px 14px 16px; border-radius:12px; font-family:'Inter',sans-serif; font-size:15px;
+    transition:all .2s ease;
+  }
+  .addr-input-wrap input[type=text]:focus{border-color:var(--accent); outline:none; box-shadow:0 0 15px rgba(255,176,32,0.2);}
+  .addr-input-wrap.has-coords input[type=text]{border-color:var(--live);}
+  .addr-input-wrap.has-coords::after{
+    content:'✓'; position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    color:var(--live); font-size:15px; font-weight:bold; pointer-events:none;
+  }
+  .addr-suggestions{
+    position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface-solid);
+    border:1px solid var(--border); border-radius:12px; overflow:hidden; z-index:30; display:none;
+    max-height:220px; overflow-y:auto; box-shadow:var(--shadow);
+  }
+  .addr-suggestions.show{display:block;}
+  .addr-suggestion{
+    display:block; width:100%; text-align:left; background:none; border:none; color:var(--text);
+    padding:12px 16px; font-size:13.5px; cursor:pointer; border-bottom:1px solid var(--border); font-family:inherit;
+    transition:background .15s, color .15s;
+  }
+  .addr-suggestion:last-child{border-bottom:none;}
+  .addr-suggestion:hover, .addr-suggestion:focus{background:rgba(255,176,32,0.1); color:var(--accent);}
+  .addr-empty{padding:12px 16px; font-size:13px; color:var(--text-muted);}
+
+  .stop-row{display:flex; gap:10px; align-items:flex-start; margin-bottom:18px;}
+  .stop-row .addr-field{flex:1; margin-bottom:0;}
+  .btn-remove-stop{
+    background:var(--surface-2); border:1px solid var(--border); color:var(--text-muted);
+    width:48px; height:48px; margin-top:25px; border-radius:12px; cursor:pointer; flex-shrink:0; font-size:20px;
+    transition:all .2s ease; display:flex; align-items:center; justify-content:center;
+  }
+  .btn-remove-stop:hover{border-color:var(--urgent); color:var(--urgent); background:rgba(239,68,68,0.1);}
+  .btn-add-stop{
+    background:none; border:1px dashed var(--border); color:var(--text-muted); padding:12px 16px;
+    border-radius:12px; font-size:13.5px; cursor:pointer; width:100%; text-align:center; margin-bottom:20px;
+    transition:all .2s ease; font-family:inherit; font-weight:500;
+  }
+  .btn-add-stop:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-dim);}
+
+  .field-row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;}
+  .field{flex:1; min-width:180px;}
+  .field label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;
+  }
+  .field input[type=number]{
+    width:100%; background:var(--surface-2); border:1px solid var(--border); color:var(--text);
+    padding:14px 16px; border-radius:12px; font-family:'JetBrains Mono',monospace; font-size:15px;
+    transition:all .2s ease;
+  }
+  .field input[type=number]:focus{border-color:var(--accent); outline:none; box-shadow:0 0 15px rgba(255,176,32,0.2);}
+  .weight-note{
+    font-size:13px; color:var(--text-muted); background:var(--surface-2);
+    border:1px solid var(--border); border-radius:12px; padding:12px 16px; margin-bottom:20px; display:none;
+  }
+  .weight-note.show{display:block;}
+
+  .toggles{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px;}
+  .toggle{
+    display:flex; align-items:center; gap:10px; background:var(--surface-2); border:1px solid var(--border);
+    padding:12px 18px; border-radius:999px; cursor:pointer; font-size:14px; user-select:none;
+    transition:all .2s ease;
+  }
+  .toggle input{accent-color:var(--accent); width:16px; height:16px;}
+  .toggle.active{border-color:var(--accent); background:var(--accent-dim); box-shadow:0 0 12px rgba(255,176,32,0.15);}
+
+  .calc-status{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--text-muted);
+    margin:14px 0; display:none; padding:12px 16px; border-radius:10px; background:rgba(239,68,68,0.1);
+  }
+  .calc-status.show{display:block;}
+  .calc-status.error{color:var(--urgent); border:1px solid rgba(239,68,68,0.3);}
+
+  .calc-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-calc{
+    background:var(--accent-grad); color:#111; border:none; font-family:inherit; width:100%; font-weight:700;
+    padding:16px; border-radius:12px; font-size:16px; box-shadow:0 4px 20px rgba(255,176,32,0.3);
+  }
+  .btn-calc:hover{background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 6px 24px rgba(255,176,32,0.45);}
+
+  /* RESULT PANEL */
+  .result{
+    margin-top:24px; padding-top:24px; border-top:1px dashed var(--border);
+    display:none;
+  }
+  .result.show{display:block;}
+  .result-badge{display:inline-flex;align-items:center;gap:7px;color:var(--live);font:600 11px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:13px;}
+  .result-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 10px var(--live);}
+  .result-rows{margin-bottom:20px;}
+  .result-row{
+    display:flex; justify-content:space-between; padding:8px 0;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--text-muted);
+  }
+  .result-total{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding-top:16px; border-top:1px solid var(--border);
+  }
+  .result-total span:first-child{font-size:14px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; font-family:'JetBrains Mono',monospace;}
+  .result-total span:last-child{
+    font-family:'JetBrains Mono',monospace; font-size:36px; font-weight:700; color:var(--accent);
+    text-shadow:0 0 20px rgba(255,176,32,0.3);
+  }
+  .result-note{font-size:12px; color:var(--text-muted); margin-top:12px;}
+
+  /* CARDS GRID */
+  .info-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px;
+  }
+  .info-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px;
+    backdrop-filter:blur(16px); transition:all .2s ease;
+  }
+  .info-card:hover{border-color:var(--border-hover); transform:translateY(-3px); box-shadow:var(--shadow);}
+  .info-card .k{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; display:block;}
+  .info-card .v{font-size:17px; font-weight:600;}
+  .info-card .v-sub{font-size:13px; color:var(--text-muted); margin-top:4px;}
+
+  /* FLOATING WHATSAPP FOR MOBILE */
+  .float-wa{
+    position:fixed; bottom:24px; right:24px; z-index:90;
+    background:linear-gradient(135deg, #25d366 0%, #128c7e 100%); color:#fff; width:60px; height:60px; border-radius:50%;
+    display:none; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(37,211,102,0.4);
+    transition:all .2s ease;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+  .float-wa:active{transform:scale(0.95);}
+  .float-wa svg{width:30px; height:30px; fill:currentColor;}
+
+  /* FOOTER */
+  footer{padding:56px 0 32px;}
+  .contact-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:40px;}
+  .contact-main h2{margin-bottom:12px;}
+  .contact-main p{color:var(--text-muted); max-width:40ch; margin:0 0 24px; font-size:15px;}
+  .contact-details{display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--text-muted);}
+  .contact-details strong{color:var(--text); font-weight:600;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:24px;
+    border-top:1px solid var(--border); font-size:12px; color:var(--text-muted); flex-wrap:wrap; gap:12px;
+  }
+  .admin-dot{
+    width:28px; height:28px; border-radius:9px; background:transparent; border:1px solid transparent; cursor:pointer;
+    opacity:.55; transition:opacity .2s, background .2s, border-color .2s; padding:0; color:var(--text-muted);
+  }
+  .admin-dot:hover{opacity:1; background:var(--accent-dim);border-color:var(--border-hover);color:var(--accent);}
+
+  @media (max-width:640px){
+    .nav-links a:not(.tag){display:none;}
+    .wa-btn span{display:none;}
+    .hero{padding:48px 0 36px;}
+    .section{padding:44px 0;}
+    .route-label{display:none;}
+    .contact-grid{flex-direction:column;}
+    .float-wa{display:flex;}
+  }
+
+  /* ADMIN MODAL */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(5,7,10,.85); backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius);
+    width:100%; max-width:420px; padding:28px; max-height:88vh; overflow-y:auto; box-shadow:var(--shadow);
+  }
+  .modal h3{margin:0 0 4px; font-size:18px;}
+  .modal .sub{font-size:13px; color:var(--text-muted); margin:0 0 20px;}
+  .modal .field{margin-bottom:16px;}
+  .modal .field label{font-size:11px;}
+  .modal input{
+    width:100%; background:var(--surface-2); border:1px solid var(--border); color:var(--text);
+    padding:12px 14px; border-radius:10px; font-family:'JetBrains Mono',monospace; font-size:14px;
+  }
+  .modal input:focus{border-color:var(--accent); outline:none;}
+  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .btn-sm{padding:10px 18px; font-size:13.5px;}
+  .btn-text{background:none; border:none; color:var(--text-muted); font-size:13px; cursor:pointer; padding:6px;}
+  .btn-text:hover{color:var(--text);}
+  .modal-error{color:var(--urgent); font-size:13px; margin:-8px 0 12px; display:none;}
+  .modal-error.show{display:block;}
+  .modal-saved{color:var(--live); font-size:13px; margin-top:12px; display:none;}
+  .modal-saved.show{display:block;}
+  .admin-close-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;}
+  .admin-x{background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer; line-height:1; padding:4px;}
+  .admin-x:hover{color:var(--text);}
+  /* RDG visual refresh: deep graphite-blue + safety yellow + route green */
+  :root{
+    --bg-base:#0d1724;
+    --bg-deep:#09111b;
+    --surface:rgba(22,35,51,.86);
+    --surface-solid:#172537;
+    --surface-2:#1d2d40;
+    --surface-3:#23384d;
+    --border:rgba(214,231,245,.13);
+    --border-hover:rgba(255,190,61,.65);
+    --text:#f4f8fb;
+    --text-muted:#a8bac9;
+    --accent:#ffbf3f;
+    --accent-grad:linear-gradient(135deg,#ffd56a 0%,#f59e0b 100%);
+    --accent-hover:linear-gradient(135deg,#ffe18c 0%,#ffb52e 100%);
+    --accent-dim:rgba(255,191,63,.13);
+    --live:#41d7a0;
+    --urgent:#ff756b;
+    --radius:22px;
+    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
+    --ease-out:cubic-bezier(.23,1,.32,1);
+  }
+  body{
+    background-color:var(--bg-base);
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),
+      radial-gradient(circle at 12% 6%,rgba(255,191,63,.15),transparent 33%),
+      radial-gradient(circle at 92% 20%,rgba(65,215,160,.10),transparent 31%),
+      radial-gradient(circle at 50% 100%,rgba(41,102,151,.14),transparent 48%);
+    background-size:42px 42px,42px 42px,auto,auto,auto;
+  }
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(180deg,rgba(9,17,27,.05),rgba(9,17,27,.46));}
+  .wrap{max-width:1120px;}
+  header{background:rgba(9,17,27,.88);border-bottom-color:rgba(255,191,63,.18);}
+  header::after{content:'';display:block;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--live),transparent);opacity:.7;}
+  .nav{padding:17px 20px;}
+  .logo{font-size:25px;letter-spacing:.04em;}
+  .logo::before{content:'RDG';font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--live);margin-right:8px;vertical-align:middle;}
+  .logo b{color:var(--accent);}
+  .wa-btn{background:rgba(65,215,160,.08);border-color:rgba(65,215,160,.26);}
+  .wa-btn:hover{border-color:var(--live);color:#bff5e2;background:rgba(65,215,160,.14);}
+  .hero{position:relative;padding:88px 0 72px;border-bottom:1px solid var(--border);}
+  .hero::after{content:'01 / 03';position:absolute;right:20px;top:94px;color:rgba(168,186,201,.5);font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;}
+  .eyebrow{color:#ffd66d;background:rgba(255,191,63,.1);border-color:rgba(255,191,63,.28);}
+  h1{font-size:clamp(48px,7.8vw,84px);max-width:11ch;letter-spacing:-.015em;}
+  .hero p{font-size:18px;line-height:1.65;color:#b9c9d6;max-width:54ch;}
+  .hero-ctas{margin-bottom:30px;}
+  .hero-proof{display:flex;gap:12px;flex-wrap:wrap;align-items:center;color:var(--text-muted);font-size:13px;}
+  .hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);}
+  .hero-proof b{color:var(--text);font-weight:600;}
+  .hero-proof i{width:7px;height:7px;background:var(--live);border-radius:50%;box-shadow:0 0 10px var(--live);}
+  .btn{border-radius:13px;transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out),background .18s,border-color .18s;}
+  .btn-primary{box-shadow:0 8px 28px rgba(245,158,11,.24);}
+  .btn-primary:hover{box-shadow:0 12px 34px rgba(245,158,11,.35);}
+  .btn-ghost{background:rgba(255,255,255,.045);}
+  .section{padding:78px 0;border-bottom-color:var(--border);}
+  .label{color:#ffd66d;}
+  h2{letter-spacing:-.01em;}
+  .section-sub{color:#adc0cf;}
+  .calc-card{background:linear-gradient(145deg,rgba(25,42,60,.94),rgba(14,25,38,.94));border-color:rgba(255,191,63,.20);box-shadow:0 28px 70px -28px rgba(0,0,0,.8);}
+  .mode-tabs{background:rgba(6,13,21,.34);}
+  .mode-tab{border-color:rgba(214,231,245,.16);}
+  .mode-tab.active{background:linear-gradient(135deg,rgba(255,191,63,.18),rgba(255,191,63,.06));box-shadow:0 0 22px rgba(255,191,63,.14);}
+  .route{background:rgba(5,12,19,.23);}
+  .route-line{border-top-color:rgba(214,231,245,.20);}
+  .addr-input-wrap input[type=text],.field input[type=number]{background:rgba(9,19,30,.48);border-color:rgba(214,231,245,.16);}
+  .addr-input-wrap input[type=text]:focus,.field input[type=number]:focus{box-shadow:0 0 0 3px rgba(255,191,63,.10),0 0 18px rgba(255,191,63,.12);}
+  .toggle{background:rgba(9,19,30,.45);border-color:rgba(214,231,245,.15);}
+  .toggle.active{background:rgba(255,191,63,.12);}
+  .result-total span:last-child{color:#ffd66d;}
+  .info-grid{grid-template-columns:repeat(4,1fr);}
+  .info-card{background:linear-gradient(155deg,rgba(25,42,60,.82),rgba(16,29,43,.78));border-color:rgba(214,231,245,.12);}
+  .info-card .k{color:#ffd66d;}
+  .info-card:hover{border-color:rgba(255,191,63,.55);box-shadow:0 18px 40px -22px rgba(255,191,63,.25);}
+  .contact-main p{color:#b9c9d6;}
+  footer{padding-top:72px;}
+  .float-wa{box-shadow:0 12px 32px rgba(37,211,102,.28);}
+  @media (max-width:800px){.info-grid{grid-template-columns:repeat(2,1fr);}.hero::after{display:none;}}
+  @media (max-width:640px){.hero{padding:60px 0 48px;}.hero p{font-size:16px;}.hero-proof{gap:8px;}.hero-proof span{font-size:12px;padding:7px 9px;}.info-grid{grid-template-columns:1fr 1fr;}.section{padding:56px 0;}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.route-line::after{animation:none;}.btn,.info-card{transition:none;}}
+
+  /* RDG light refresh: clear gradient background for a more welcoming presentation */
+  :root{
+    --bg-base:#f5f8fb;
+    --bg-deep:#e7eff6;
+    --surface:rgba(255,255,255,.88);
+    --surface-solid:#ffffff;
+    --surface-2:#f1f5f8;
+    --surface-3:#e7eef4;
+    --border:rgba(19,48,76,.14);
+    --border-hover:rgba(214,137,14,.60);
+    --text:#17324d;
+    --text-muted:#5e7386;
+    --accent:#d8870b;
+    --accent-grad:linear-gradient(135deg,#ffd978 0%,#f4a51c 100%);
+    --accent-hover:linear-gradient(135deg,#ffe59a 0%,#f7b63e 100%);
+    --accent-dim:rgba(244,165,28,.13);
+    --live:#168b62;
+    --urgent:#d9534f;
+    --shadow:0 24px 60px -24px rgba(27,58,86,.28);
+  }
+  body{
+    color:var(--text);
+    background-color:#f5f8fb;
+    background-image:
+      radial-gradient(circle at 8% 0%,rgba(255,211,113,.42),transparent 30%),
+      radial-gradient(circle at 96% 18%,rgba(135,211,191,.28),transparent 32%),
+      linear-gradient(135deg,#ffffff 0%,#f4f8fb 46%,#eaf4f6 100%);
+    background-attachment:fixed;
+    background-size:auto,auto,auto;
+  }
+  body::before{background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(217,232,239,.18));}
+  header{background:rgba(255,255,255,.86);border-bottom-color:rgba(19,48,76,.12);box-shadow:0 5px 24px rgba(24,61,88,.08);}
+  header::after{background:linear-gradient(90deg,transparent,#f0aa28,#3bb58a,transparent);}
+  .logo{color:#17324d;text-shadow:none;display:flex;align-items:center;gap:7px;}
+  .logo::before{content:none;}
+  .package-mark{display:inline-flex;align-items:center;justify-content:center;width:31px;height:31px;border-radius:10px;background:linear-gradient(145deg,#ffd978,#f2a11a);color:#17324d;box-shadow:0 6px 14px rgba(216,135,11,.23);}
+  .package-mark svg{width:19px;height:19px;}
+  .logo b{color:#c67408;}
+  .nav-links a{color:#5e7386;}
+  .nav-links a:hover{color:#17324d;}
+  .wa-btn{background:rgba(22,139,98,.08);border-color:rgba(22,139,98,.25);color:#205b4a;}
+  .wa-btn:hover{border-color:var(--live);color:#126a4c;background:rgba(22,139,98,.14);}
+  .hero{border-bottom-color:rgba(19,48,76,.12);}
+  .hero::after{color:rgba(94,115,134,.58);}
+  .eyebrow{color:#a96800;background:rgba(244,165,28,.12);border-color:rgba(216,135,11,.28);}
+  .dot{background:var(--live);box-shadow:0 0 10px rgba(22,139,98,.38);}
+  h1{color:#17324d;text-shadow:none;}
+  h1 em{background:linear-gradient(135deg,#d8870b 0%,#b96900 100%);-webkit-background-clip:text;}
+  .hero p,.contact-main p{color:#5e7386;}
+  .hero-proof span{background:rgba(255,255,255,.62);border-color:rgba(19,48,76,.12);}
+  .hero-proof b{color:#17324d;}
+  .btn-ghost{color:#17324d;background:rgba(255,255,255,.65);border-color:rgba(19,48,76,.16);}
+  .btn-ghost:hover{color:#a96800;border-color:#d8870b;background:rgba(244,165,28,.12);}
+  .section{border-bottom-color:rgba(19,48,76,.12);}
+  .label{color:#a96800;}
+  .section-sub{color:#5e7386;}
+  .calc-card{background:rgba(255,255,255,.86);border-color:rgba(19,48,76,.14);box-shadow:0 28px 70px -28px rgba(27,58,86,.28);}
+  .mode-tabs{background:rgba(230,238,244,.58);}
+  .mode-tab{border-color:rgba(19,48,76,.14);color:#5e7386;}
+  .mode-tab.active{color:#a96800;border-color:#d8870b;background:rgba(244,165,28,.14);box-shadow:0 0 18px rgba(216,135,11,.12);}
+  .mode-tab:not(.active):hover{color:#17324d;border-color:rgba(19,48,76,.25);}
+  .route{background:rgba(231,239,245,.42);}
+  .route-line{border-top-color:rgba(19,48,76,.18);}
+  .route-line::after{border-top-color:#dda025;}
+  .route-label{color:#5e7386;}
+  .addr-input-wrap input[type=text],.field input[type=number]{background:#fff;border-color:rgba(19,48,76,.16);color:#17324d;box-shadow:0 3px 12px rgba(27,58,86,.04);}
+  .addr-input-wrap input[type=text]:focus,.field input[type=number]:focus{border-color:#d8870b;box-shadow:0 0 0 3px rgba(244,165,28,.14),0 5px 16px rgba(27,58,86,.08);}
+  .addr-suggestions{background:#fff;border-color:rgba(19,48,76,.14);box-shadow:0 20px 42px rgba(27,58,86,.16);}
+  .addr-suggestion{color:#17324d;border-bottom-color:rgba(19,48,76,.10);}
+  .addr-suggestion:hover,.addr-suggestion:focus{background:rgba(244,165,28,.12);color:#a96800;}
+  .route-helper{color:#5e7386;}
+  .btn-add-stop{border-color:rgba(19,48,76,.20);color:#5e7386;}
+  .btn-add-stop:hover{border-color:#d8870b;color:#a96800;background:rgba(244,165,28,.10);}
+  .toggle{background:#f5f8fb;border-color:rgba(19,48,76,.13);color:#35536b;}
+  .toggle.active{border-color:#d8870b;background:rgba(244,165,28,.13);color:#8b5700;}
+  .calc-status{background:rgba(217,83,79,.08);}
+  .weight-note{background:#f1f5f8;border-color:rgba(19,48,76,.11);}
+  .result{border-top-color:rgba(19,48,76,.18);}
+  .result-row{color:#5e7386;}
+  .result-total{border-top-color:rgba(19,48,76,.13);}
+  .result-total span:first-child{color:#5e7386;}
+  .result-total span:last-child{color:#b86b00;text-shadow:none;}
+  .result-note{color:#5e7386;}
+  .info-card{background:rgba(255,255,255,.78);border-color:rgba(19,48,76,.12);box-shadow:0 12px 30px rgba(27,58,86,.06);}
+  .info-card .k{color:#a96800;}
+  .info-card .v-sub{color:#5e7386;}
+  .info-card:hover{border-color:#d8870b;box-shadow:0 18px 40px -22px rgba(216,135,11,.22);}
+  .contact-details{color:#5e7386;}
+  .contact-details strong{color:#17324d;}
+  .foot-bottom{border-top-color:rgba(19,48,76,.12);}
+  .float-wa{box-shadow:0 12px 32px rgba(22,139,98,.22);}
+  .modal{background:#fff;border-color:rgba(19,48,76,.14);}
+  .modal input{background:#f5f8fb;border-color:rgba(19,48,76,.15);color:#17324d;}
+  .modal .sub,.modal .field label{color:#5e7386;}
+  .admin-dot{color:#5e7386;}
+  .admin-dot:hover{color:#a96800;background:rgba(244,165,28,.12);border-color:#d8870b;}
+  .payment-box{margin:4px 0 22px;padding:17px;border:1px solid rgba(19,48,76,.13);border-radius:15px;background:rgba(241,245,248,.72);}
+  .payment-box legend{padding:0 7px;color:#a96800;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+  .payment-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:5px;}
+  .payment-option{display:flex;align-items:center;gap:8px;min-height:43px;padding:10px 11px;border:1px solid rgba(19,48,76,.13);border-radius:11px;background:#fff;color:#35536b;font-size:13px;cursor:pointer;transition:border-color .18s,background .18s,transform .18s;}
+  .payment-option:hover{border-color:#d8870b;transform:translateY(-1px);}
+  .payment-option:has(input:checked){border-color:#d8870b;background:rgba(244,165,28,.12);color:#8b5700;}
+  .payment-option input{accent-color:#d8870b;}
+  .payment-note{margin:10px 0 0;color:#6d8090;font-size:12px;}
+  @media (max-width:640px){.payment-options{grid-template-columns:1fr 1fr;}.package-mark{width:28px;height:28px;}}
+
+  .contact-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .contact-email{color:#a96800;font-weight:600;text-decoration:underline;text-decoration-color:rgba(216,135,11,.35);text-underline-offset:3px;}
+  .contact-email:hover{color:#7f4e00;text-decoration-color:#d8870b;}
+  @media (max-width:640px){.contact-actions{flex-direction:column;align-items:stretch;}.contact-actions .btn{text-align:center;}}
+
+  .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .result-actions .btn{width:100%;text-align:center;}
+  .pdf-help{font-size:11.5px;color:var(--text-muted);margin:10px 0 0;text-align:center;}
+  @media (max-width:640px){.result-actions{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <div class="logo display"><span class="package-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 7 8-4 8 4-8 4-8-4Z"/><path d="M4 7v10l8 4 8-4V7"/><path d="M12 11v10"/><path d="m8 5 8 4"/></svg></span><b>RDG</b>LOGEXPRESS</div>
+    <div class="nav-links">
+      <a href="#atendimento">Atendimento</a>
+      <a href="#contato">Contato</a>
+      <a href="#frete" class="tag">Calcular frete</a>
+    </div>
+    <a class="wa-btn" href="https://wa.me/5511921398732" target="_blank" rel="noopener">
+      <span>WhatsApp</span> ↗
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div class="eyebrow"><span class="dot"></span> São Paulo · Interior e Litoral</div>
+    <h1 class="display">Seu frete, <em>calculado</em> na hora.</h1>
+    <p>Moto-frete rápido, seguro e transparente para entregas particulares e corporativas. Simule o valor exato abaixo e solicite via WhatsApp.</p>
+    <div class="hero-ctas">
+      <a href="#frete" class="btn btn-primary">Calcular meu frete</a>
+      <a href="https://wa.me/5511921398732" target="_blank" rel="noopener" class="btn btn-ghost">Falar no WhatsApp</a>
+    </div>
+    <div class="hero-proof" aria-label="Diferenciais da RDGLOGEXPRESS">
+      <span><i></i><b>Atendimento humano</b></span>
+      <span>✓ Valor transparente</span>
+      <span>↗ Solicitação pelo WhatsApp</span>
+    </div>
+  </section>
+
+  <section class="section wrap" id="frete">
+    <span class="label">Simulador Direto</span>
+    <h2 class="display">Calcule o valor da sua corrida</h2>
+    <p class="section-sub">Insira coleta e entrega. A rota considera o trajeto, paradas, peso e adicionais selecionados.</p>
+
+    <div class="calc-card">
+      <div class="mode-tabs" id="mode-tabs">
+        <button type="button" class="mode-tab active" data-mode="moto" id="mode-tab-moto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="2.6"/><circle cx="18.5" cy="17.5" r="2.6"/><path d="M5.5 17.5 9 10h4l2 3h3.5"/><path d="M9 10 7.5 6.5h3"/></svg>
+          Moto
+        </button>
+        <button type="button" class="mode-tab" data-mode="carro" id="mode-tab-carro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 16v-3l2-4.5C6.4 7.4 7.2 7 8 7h8c.8 0 1.6.4 2 1.5L20 13v3"/><path d="M4 16h16"/><circle cx="7.5" cy="16" r="1.7"/><circle cx="16.5" cy="16" r="1.7"/></svg>
+          Carro / Utilitário
+        </button>
+      </div>
+      
+      <div class="route">
+        <span class="pin origin"></span>
+        <span class="route-label">Coleta</span>
+        <div class="route-line"></div>
+        <span class="route-label">Entrega</span>
+        <span class="pin dest"></span>
+      </div>
+
+      <div class="calc-body">
+        <p id="route-helper" class="route-helper">Dica: selecione uma sugestão para calcular a distância com mais precisão.</p>
+        <div class="addr-field">
+          <label for="origem">Endereço de coleta</label>
+          <div class="addr-input-wrap" id="origem-wrap">
+            <input type="text" id="origem" placeholder="Rua, número e cidade ou CEP" autocomplete="street-address" aria-describedby="route-helper" required>
+            <div class="addr-suggestions" id="origem-suggestions"></div>
+          </div>
+        </div>
+
+        <div id="stops-container"></div>
+        <button type="button" class="btn-add-stop" id="btn-add-stop">+ Adicionar parada intermediária</button>
+
+        <div class="addr-field">
+          <label for="destino">Endereço de entrega</label>
+          <div class="addr-input-wrap" id="destino-wrap">
+            <input type="text" id="destino" placeholder="Rua, número e cidade ou CEP" autocomplete="street-address" aria-describedby="route-helper" required>
+            <div class="addr-suggestions" id="destino-suggestions"></div>
+          </div>
+        </div>
+
+        <p class="calc-status" id="calc-status"></p>
+
+        <div class="field-row" id="peso-row">
+          <div class="field">
+            <label for="peso">Peso estimado da carga (kg)</label>
+            <input type="number" id="peso" min="0" step="1" placeholder="Ex: 5">
+          </div>
+        </div>
+        <p class="weight-note" id="peso-note-carro">Opção de Carro/Utilitário sem taxa adicional por quilo excedente.</p>
+
+        <div class="toggles">
+          <label class="toggle" id="toggle-urgente">
+            <input type="checkbox" id="urgente">
+            Entrega Urgente
+          </label>
+          <label class="toggle" id="toggle-agendada">
+            <input type="checkbox" id="agendada">
+            Coleta Agendada
+          </label>
+        </div>
+
+
+        <fieldset class="payment-box">
+          <legend>Forma de pagamento</legend>
+          <div class="payment-options">
+            <label class="payment-option"><input type="radio" name="pagamento" value="Pix" checked> Pix</label>
+            <label class="payment-option"><input type="radio" name="pagamento" value="Cartão"> Cartão</label>
+            <label class="payment-option"><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
+            <label class="payment-option"><input type="radio" name="pagamento" value="Faturado — cliente fixo"> Faturado</label>
+          </div>
+          <p class="payment-note">A opção faturado é destinada a clientes fixos com cadastro combinado previamente.</p>
+        </fieldset>
+
+        <div class="calc-actions">
+          <button type="button" class="btn btn-calc" id="btn-calcular">Calcular valor da corrida <span aria-hidden="true">→</span></button>
+        </div>
+
+        <div class="result" id="result" aria-live="polite">
+          <div class="result-badge">Resumo da sua rota</div>
+          <div class="result-rows" id="result-rows"></div>
+          <div class="result-total">
+            <span>Total estimado</span>
+            <span class="mono" id="result-total">R$ 0,00</span>
+          </div>
+          <p class="result-note">Gere o formulário em PDF para anexar ao WhatsApp e mantenha o registro completo do orçamento.</p>
+          <div class="calc-actions result-actions" style="margin-top:18px;">
+            <button type="button" class="btn btn-ghost" id="btn-pdf-orcamento">Gerar formulário em PDF</button>
+            <a class="btn btn-primary" id="wa-pedido" href="#" target="_blank" rel="noopener">Pedir este frete no WhatsApp</a>
+          </div>
+          <p class="pdf-help">Ao abrir a impressão, escolha <strong>Salvar como PDF</strong>. Depois, anexe o arquivo na conversa do WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="atendimento">
+    <span class="label">Operação & Cobertura</span>
+    <h2 class="display">Como trabalhamos</h2>
+    <p class="section-sub">Base em Diadema, atendendo toda a Grande São Paulo, ABCD, Interior e Litoral.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="k">Disponibilidade</span>
+        <div class="v">Segunda a Sábado</div>
+        <div class="v-sub">Horários flexíveis e agendamentos</div>
+      </div>
+      <div class="info-card">
+        <span class="k">Atendimento</span>
+        <div class="v">Grande SP e Região</div>
+        <div class="v-sub">Viagens para Interior e Litoral</div>
+      </div>
+      <div class="info-card">
+        <span class="k">Pagamentos</span>
+        <div class="v">Pix, cartão & dinheiro</div>
+        <div class="v-sub">Faturado disponível para clientes fixos</div>
+      </div>
+      <div class="info-card">
+        <span class="k">Localização Base</span>
+        <div class="v">Diadema · SP</div>
+        <div class="v-sub">Agilidade na grande São Paulo</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap" id="contato">
+  <div class="contact-grid">
+    <div class="contact-main">
+      <h2 class="display">Precisa de uma entrega agora?</h2>
+      <p>Chame a RDGLOGEXPRESS no WhatsApp para atendimento imediato ou consulte valores por e-mail.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://wa.me/5511921398732" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <a class="btn btn-ghost" href="mailto:marques.dev01@outlook.com?subject=Consulta%20de%20valores%20de%20corrida%20-%20RDGLOGEXPRESS&body=Ol%C3%A1%2C%20gostaria%20de%20consultar%20um%20valor%20de%20corrida.">Consultar por e-mail</a>
+      </div>
+    </div>
+    <div class="contact-details">
+      <span><strong>Contato Direto / WhatsApp</strong></span>
+      <span>(11) 92139-8732</span>
+      <span style="margin-top:12px;"><strong>Orçamentos por e-mail</strong></span>
+      <a class="contact-email" href="mailto:marques.dev01@outlook.com?subject=Consulta%20de%20valores%20de%20corrida%20-%20RDGLOGEXPRESS&body=Ol%C3%A1%2C%20gostaria%20de%20consultar%20um%20valor%20de%20corrida.">marques.dev01@outlook.com</a>
+      <span style="margin-top:12px;"><strong>Base de Operação</strong></span>
+      <span>Diadema · São Paulo</span>
+    </div>
+  </div>
+
+  <div class="foot-bottom">
+    <span>© 2026 RDGLOGEXPRESS — Logística e Entregas Rápidas</span>
+    <button class="admin-dot" id="admin-trigger" aria-label="Abrir painel de tarifas" title="Painel de tarifas">⚙</button>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5511921398732" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+</a>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-overlay">
+  <div class="modal">
+    <div id="admin-login-view">
+      <div class="admin-close-row">
+        <h3>Painel de Controle</h3>
+        <button class="admin-x" id="admin-close-1" aria-label="Fechar">×</button>
+      </div>
+      <p class="sub">Acesso exclusivo para configuração de tarifas.</p>
+      <div class="field">
+        <label for="admin-pass">Senha de acesso</label>
+        <input type="password" id="admin-pass" placeholder="••••••••">
+      </div>
+      <p class="modal-error" id="admin-error">Senha incorreta.</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-sm" id="admin-login-btn">Entrar</button>
+        <button class="btn-text" id="admin-cancel-1">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="admin-rates-view" style="display:none;">
+      <div class="admin-close-row">
+        <h3>Tabela de Tarifas</h3>
+        <button class="admin-x" id="admin-close-2" aria-label="Fechar">×</button>
+      </div>
+      <p class="sub">Valores salvos localmente neste navegador.</p>
+
+      <div class="mode-tabs" id="admin-mode-tabs" style="margin:0 0 16px; border-radius:10px; border:1px solid var(--border);">
+        <button type="button" class="mode-tab active" data-admin-mode="moto" id="admin-mode-tab-moto">Moto</button>
+        <button type="button" class="mode-tab" data-admin-mode="carro" id="admin-mode-tab-carro">Carro</button>
+      </div>
+
+      <div id="admin-rates-moto">
+        <div class="field">
+          <label for="r-fixa-moto">Taxa fixa inicial (R$)</label>
+          <input type="number" id="r-fixa-moto" step="0.5" min="0">
+        </div>
+        <div class="field">
+          <label for="r-km-moto">Valor/km (Até 50km)</label>
+          <input type="number" id="r-km-moto" step="0.05" min="0">
+        </div>
+        <div class="field">
+          <label for="r-km-moto-acima">Valor/km (Acima de 50km)</label>
+          <input type="number" id="r-km-moto-acima" step="0.05" min="0">
+        </div>
+        <div class="field">
+          <label for="r-min-moto">Valor mínimo da corrida (R$)</label>
+          <input type="number" id="r-min-moto" step="0.5" min="0">
+        </div>
+        <div class="field">
+          <label for="r-peso-limite">Peso incluso no valor base (kg)</label>
+          <input type="number" id="r-peso-limite" step="1" min="0">
+        </div>
+        <div class="field">
+          <label for="r-peso-adicional">Adicional por kg excedente (R$)</label>
+          <input type="number" id="r-peso-adicional" step="0.5" min="0">
+        </div>
+      </div>
+
+      <div id="admin-rates-carro" style="display:none;">
+        <div class="field">
+          <label for="r-fixa-carro">Taxa fixa inicial (R$)</label>
+          <input type="number" id="r-fixa-carro" step="0.5" min="0">
+        </div>
+        <div class="field">
+          <label for="r-km-carro">Valor/km (Até 50km)</label>
+          <input type="number" id="r-km-carro" step="0.05" min="0">
+        </div>
+        <div class="field">
+          <label for="r-km-carro-acima">Valor/km (Acima de 50km)</label>
+          <input type="number" id="r-km-carro-acima" step="0.05" min="0">
+        </div>
+        <div class="field">
+          <label for="r-min-carro">Valor mínimo da corrida (R$)</label>
+          <input type="number" id="r-min-carro" step="0.5" min="0">
+        </div>
+      </div>
+
+      <div style="margin:16px 0 12px; border-top:1px solid var(--border); padding-top:12px;">
+        <p class="sub" style="margin-bottom:10px;">Taxas de Adicionais</p>
+        <div class="field">
+          <label for="r-urgente">Taxa Entrega Urgente (R$)</label>
+          <input type="number" id="r-urgente" step="0.5" min="0">
+        </div>
+        <div class="field">
+          <label for="r-agendada">Taxa Coleta Agendada (R$)</label>
+          <input type="number" id="r-agendada" step="0.5" min="0">
+        </div>
+        <div class="field">
+          <label for="r-parada">Taxa Parada Intermediária (R$)</label>
+          <input type="number" id="r-parada" step="0.5" min="0">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-sm" id="admin-save-btn">Salvar Tarifas</button>
+        <button class="btn-text" id="admin-restore-btn">Restaurar Padrão</button>
+      </div>
+      <p class="modal-saved" id="admin-saved-msg">Tarifas salvas com sucesso! ✓</p>
+      <div style="margin-top:14px; border-top:1px solid var(--border); padding-top:10px;">
+        <button class="btn-text" id="admin-logout-btn">Sair do Painel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ADMIN_PASSWORD = "rdg2026";
+  var WHATSAPP_NUMBER = "5511921398732";
+  var STORAGE_KEY = "rdg_rates_v2";
+  var DEFAULT_RATES = {
+    moto:  { fixa:0, kmAte50:2.50, kmAcima50:2.20, minimo:25, pesoLimite:20, pesoAdicional:2 },
+    carro: { fixa:0, kmAte50:3.00, kmAcima50:2.50, minimo:35 },
+    urgente:15, agendada:10, parada:7
+  };
+
+  var MAPBOX_TOKEN = "pk.eyJ1Ijoicm9vZHJpZ29tYXJxdWVzIiwiYSI6ImNtdDN2aWFmNzBhcW8yd29kNjVuaWI2OXAifQ.ZpyJwxiXMqE0PaNPzJtBNA";
+
+  function getRates(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return JSON.parse(JSON.stringify(DEFAULT_RATES));
+      var parsed = JSON.parse(raw);
+      return {
+        moto: Object.assign({}, DEFAULT_RATES.moto, parsed.moto),
+        carro: Object.assign({}, DEFAULT_RATES.carro, parsed.carro),
+        urgente: (typeof parsed.urgente === 'number') ? parsed.urgente : DEFAULT_RATES.urgente,
+        agendada: (typeof parsed.agendada === 'number') ? parsed.agendada : DEFAULT_RATES.agendada,
+        parada: (typeof parsed.parada === 'number') ? parsed.parada : DEFAULT_RATES.parada
+      };
+    }catch(e){ return JSON.parse(JSON.stringify(DEFAULT_RATES)); }
+  }
+  function setRates(r){ localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); }
+  function fmt(n){ return "R$ " + n.toFixed(2).replace(".", ","); }
+
+  function calcHaversineKm(lat1, lon1, lat2, lon2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return (R * c) * 1.3;
+  }
+
+  var urgenteCb = document.getElementById('urgente');
+  var agendadaCb = document.getElementById('agendada');
+  var toggleUrgente = document.getElementById('toggle-urgente');
+  var toggleAgendada = document.getElementById('toggle-agendada');
+  var btnCalcular = document.getElementById('btn-calcular');
+  var resultEl = document.getElementById('result');
+  var resultRows = document.getElementById('result-rows');
+  var resultTotal = document.getElementById('result-total');
+  var waPedido = document.getElementById('wa-pedido');
+  var statusEl = document.getElementById('calc-status');
+  var stopsContainer = document.getElementById('stops-container');
+  var btnAddStop = document.getElementById('btn-add-stop');
+  var pesoRow = document.getElementById('peso-row');
+  var pesoInput = document.getElementById('peso');
+  var pesoNoteCarro = document.getElementById('peso-note-carro');
+  var paymentInputs = document.querySelectorAll('input[name=pagamento]');
+
+  function getPaymentMethod(){
+    var selected = document.querySelector('input[name=pagamento]:checked');
+    return selected ? selected.value : 'Pix';
+  }
+
+  var currentMode = 'moto';
+  var modeTabs = document.querySelectorAll('#mode-tabs .mode-tab');
+  Array.prototype.forEach.call(modeTabs, function(tab){
+    tab.addEventListener('click', function(){
+      currentMode = tab.getAttribute('data-mode');
+      Array.prototype.forEach.call(modeTabs, function(t){ t.classList.toggle('active', t === tab); });
+      var isMoto = currentMode === 'moto';
+      pesoRow.style.display = isMoto ? 'flex' : 'none';
+      pesoNoteCarro.classList.toggle('show', !isMoto);
+      if(!isMoto) pesoInput.value = '';
+      resultEl.classList.remove('show');
+      clearStatus();
+    });
+  });
+
+  urgenteCb.addEventListener('change', function(){ toggleUrgente.classList.toggle('active', urgenteCb.checked); });
+  agendadaCb.addEventListener('change', function(){ toggleAgendada.classList.toggle('active', agendadaCb.checked); });
+  Array.prototype.forEach.call(paymentInputs, function(input){
+    input.addEventListener('change', function(){
+      Array.prototype.forEach.call(paymentInputs, function(item){ item.closest('.payment-option').classList.toggle('selected', item.checked); });
+    });
+  });
+
+  function showStatus(msg, isError){
+    statusEl.textContent = msg;
+    statusEl.classList.toggle('error', !!isError);
+    statusEl.classList.add('show');
+  }
+  function clearStatus(){ statusEl.classList.remove('show'); }
+
+  var locations = {};
+  var stopCounter = 0;
+
+  function debounce(fn, delay){
+    var t;
+    return function(){
+      var args = arguments, ctx = this;
+      clearTimeout(t);
+      t = setTimeout(function(){ fn.apply(ctx, args); }, delay);
+    };
+  }
+
+  function setupAutocomplete(inputEl, suggestionsEl, wrapEl, key){
+    var doSearch = debounce(function(query){
+      if(!query || query.length < 3){
+        suggestionsEl.classList.remove('show');
+        return;
+      }
+      var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(query) + '.json'
+        + '?access_token=' + MAPBOX_TOKEN
+        + '&country=BR'
+        + '&language=pt'
+        + '&limit=5'
+        + '&autocomplete=true'
+        + '&proximity=-46.6333,-23.5505'
+        + '&bbox=-53.11,-25.31,-44.16,-19.78'
+        + '&types=address,postcode,place,neighborhood,locality,poi';
+      fetch(url).then(function(r){ return r.json(); }).then(function(data){
+        var feats = data.features || [];
+        if(feats.length === 0){
+          suggestionsEl.innerHTML = '<div class="addr-empty">Nenhum endereço encontrado.</div>';
+          suggestionsEl.classList.add('show');
+          return;
+        }
+        suggestionsEl.innerHTML = feats.map(function(f, i){
+          return '<button type="button" class="addr-suggestion" data-idx="' + i + '">' + f.place_name + '</button>';
+        }).join('');
+        suggestionsEl.classList.add('show');
+        Array.prototype.forEach.call(suggestionsEl.querySelectorAll('.addr-suggestion'), function(btn){
+          btn.addEventListener('click', function(){
+            var f = feats[parseInt(btn.getAttribute('data-idx'), 10)];
+            inputEl.value = f.place_name;
+            locations[key] = { lng: f.center[0], lat: f.center[1], text: f.place_name };
+            wrapEl.classList.add('has-coords');
+            suggestionsEl.classList.remove('show');
+          });
+        });
+      }).catch(function(){
+        suggestionsEl.innerHTML = '<div class="addr-empty">Digite o endereço completo com número e cidade.</div>';
+        suggestionsEl.classList.add('show');
+      });
+    }, 300);
+
+    inputEl.addEventListener('input', function(){
+      delete locations[key];
+      wrapEl.classList.remove('has-coords');
+      doSearch(inputEl.value.trim());
+    });
+    document.addEventListener('click', function(e){
+      if(!wrapEl.contains(e.target)) suggestionsEl.classList.remove('show');
+    });
+  }
+
+  setupAutocomplete(document.getElementById('origem'), document.getElementById('origem-suggestions'), document.getElementById('origem-wrap'), 'origem');
+  setupAutocomplete(document.getElementById('destino'), document.getElementById('destino-suggestions'), document.getElementById('destino-wrap'), 'destino');
+
+  function addStopRow(){
+    stopCounter++;
+    var key = 'stop-' + stopCounter;
+    var row = document.createElement('div');
+    row.className = 'stop-row';
+    row.setAttribute('data-key', key);
+    row.innerHTML =
+      '<div class="addr-field">' +
+        '<label>Parada adicional</label>' +
+        '<div class="addr-input-wrap" id="' + key + '-wrap">' +
+          '<input type="text" placeholder="Rua, número e cidade" autocomplete="off">' +
+          '<div class="addr-suggestions"></div>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="btn-remove-stop" aria-label="Remover parada">×</button>';
+    stopsContainer.appendChild(row);
+
+    setupAutocomplete(row.querySelector('input[type=text]'), row.querySelector('.addr-suggestions'), row.querySelector('.addr-input-wrap'), key);
+
+    row.querySelector('.btn-remove-stop').addEventListener('click', function(){
+      delete locations[key];
+      row.remove();
+    });
+  }
+  btnAddStop.addEventListener('click', addStopRow);
+
+  function getStopKeys(){
+    return Array.prototype.map.call(stopsContainer.querySelectorAll('.stop-row'), function(row){
+      return row.getAttribute('data-key');
+    });
+  }
+
+  function processCalculation(km, stopKeys){
+    var allRates = getRates();
+    var rates = allRates[currentMode];
+    var kmAte50 = Math.min(km, 50);
+    var kmAcima50 = Math.max(km - 50, 0);
+    var base = rates.fixa + (kmAte50 * rates.kmAte50) + (kmAcima50 * rates.kmAcima50);
+    var subtotal = Math.max(base, rates.minimo);
+
+    var peso = parseFloat(pesoInput.value) || 0;
+    var addPeso = 0;
+    if(currentMode === 'moto' && peso > rates.pesoLimite){
+      addPeso = Math.ceil(peso - rates.pesoLimite) * rates.pesoAdicional;
+    }
+
+    var addParadas = stopKeys.length * allRates.parada;
+    var addUrgente = urgenteCb.checked ? allRates.urgente : 0;
+    var addAgendada = agendadaCb.checked ? allRates.agendada : 0;
+    var total = subtotal + addPeso + addParadas + addUrgente + addAgendada;
+
+    var veiculoLabel = currentMode === 'moto' ? 'Moto' : 'Carro';
+    var rows = [];
+    rows.push('<div class="result-row"><span>Corrida ' + veiculoLabel + ' (' + km.toFixed(1).replace('.',',') + ' km)</span><span>' + fmt(subtotal) + '</span></div>');
+    if(addPeso > 0) rows.push('<div class="result-row"><span>Peso excedente (' + (peso - rates.pesoLimite).toFixed(0) + ' kg acima de ' + rates.pesoLimite + ' kg)</span><span>' + fmt(addPeso) + '</span></div>');
+    if(addParadas > 0) rows.push('<div class="result-row"><span>Paradas adicionais (' + stopKeys.length + ')</span><span>' + fmt(addParadas) + '</span></div>');
+    if(addUrgente > 0) rows.push('<div class="result-row"><span>Entrega urgente</span><span>' + fmt(addUrgente) + '</span></div>');
+    if(addAgendada > 0) rows.push('<div class="result-row"><span>Coleta agendada</span><span>' + fmt(addAgendada) + '</span></div>');
+    
+    resultRows.innerHTML = rows.join('');
+    resultTotal.textContent = fmt(total);
+    resultEl.classList.add('show');
+
+    var stopLines = stopKeys.map(function(k, i){ return 'Parada ' + (i+1) + ': ' + (locations[k] ? locations[k].text : 'Intermediária') + '\n'; }).join('');
+    var origText = locations.origem ? locations.origem.text : document.getElementById('origem').value;
+    var destText = locations.destino ? locations.destino.text : document.getElementById('destino').value;
+
+    var msg = "*RDGLOGEXPRESS — SOLICITAÇÃO DE FRETE*\n\n" +
+      "Olá! Gostaria de confirmar uma corrida calculada pelo site.\n\n" +
+      "*DADOS DO SERVIÇO*\n" +
+      "Veículo: " + veiculoLabel + "\n" +
+      "Pagamento: " + getPaymentMethod() + "\n" +
+      "Urgência: " + (urgenteCb.checked ? "Sim" : "Não") + "\n" +
+      "Agendamento: " + (agendadaCb.checked ? "Sim" : "Não") + "\n\n" +
+      "*ROTA*\n" +
+      "Coleta: " + origText + "\n" +
+      stopLines +
+      "Entrega: " + destText + "\n" +
+      "Distância aproximada: " + km.toFixed(1).replace('.',',') + " km\n" +
+      (peso > 0 ? "Peso: " + peso + " kg\n" : "Peso: Não informado\n") +
+      "\n*VALORES*\n" +
+      "Total estimado: " + fmt(total) + "\n\n" +
+      "PDF do formulário será anexado para conferência.";
+    waPedido.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+
+    window.rdgQuote = {
+      number: 'ORC-' + new Date().getFullYear() + '-' + String(Date.now()).slice(-6),
+      date: new Date().toLocaleDateString('pt-BR'),
+      vehicle: veiculoLabel,
+      payment: getPaymentMethod(),
+      origin: origText,
+      destination: destText,
+      stops: stopKeys.map(function(k, i){ return (i + 1) + '. ' + (locations[k] ? locations[k].text : 'Intermediária'); }),
+      distance: km.toFixed(1).replace('.', ',') + ' km',
+      weight: peso > 0 ? peso + ' kg' : 'Não informado',
+      urgent: urgenteCb.checked ? 'Sim' : 'Não',
+      scheduled: agendadaCb.checked ? 'Sim' : 'Não',
+      total: fmt(total)
+    };
+  }
+
+  btnCalcular.addEventListener('click', function(){
+    clearStatus();
+
+    var origVal = document.getElementById('origem').value.trim();
+    var destVal = document.getElementById('destino').value.trim();
+
+    if(!origVal){
+      showStatus('Por favor, preencha o endereço de coleta.', true);
+      return;
+    }
+    if(!destVal){
+      showStatus('Por favor, preencha o endereço de entrega.', true);
+      return;
+    }
+
+    var stopKeys = getStopKeys();
+
+    btnCalcular.disabled = true;
+    btnCalcular.innerHTML = 'Calculando rota... <span aria-hidden="true">◌</span>';
+
+    if(locations.origem && locations.destino){
+      var coordsOrder = ['origem'].concat(stopKeys).concat(['destino']);
+      var coordsStr = coordsOrder.map(function(k){ return locations[k].lng + ',' + locations[k].lat; }).join(';');
+      var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + coordsStr
+        + '?access_token=' + MAPBOX_TOKEN + '&overview=false&geometries=geojson';
+
+      fetch(url).then(function(r){ return r.json(); }).then(function(data){
+        btnCalcular.disabled = false;
+        btnCalcular.innerHTML = 'Calcular valor da corrida <span aria-hidden="true">→</span>';
+
+        if(data.routes && data.routes.length > 0){
+          var km = data.routes[0].distance / 1000;
+          processCalculation(km, stopKeys);
+        } else {
+          var kmHaversine = calcHaversineKm(locations.origem.lat, locations.origem.lng, locations.destino.lat, locations.destino.lng);
+          processCalculation(kmHaversine, stopKeys);
+        }
+      }).catch(function(){
+        btnCalcular.disabled = false;
+        btnCalcular.innerHTML = 'Calcular valor da corrida <span aria-hidden="true">→</span>';
+        var kmHaversine = calcHaversineKm(locations.origem.lat, locations.origem.lng, locations.destino.lat, locations.destino.lng);
+        processCalculation(kmHaversine, stopKeys);
+      });
+    } else {
+      setTimeout(function(){
+        btnCalcular.disabled = false;
+        btnCalcular.innerHTML = 'Calcular valor da corrida <span aria-hidden="true">→</span>';
+        processCalculation(12, stopKeys);
+      }, 500);
+    }
+  });
+
+
+  function escapeQuote(value){
+    return String(value || '').replace(/[&<>"']/g, function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]; });
+  }
+  function openQuotePrint(){
+    var q = window.rdgQuote;
+    if(!q){ return; }
+    var stops = q.stops.length ? q.stops.map(function(s){ return '<li>' + escapeQuote(s) + '</li>'; }).join('') : '<li>Nenhuma</li>';
+    var printWindow = window.open('', '_blank', 'width=900,height=1000');
+    if(!printWindow){ alert('Permita pop-ups para gerar o formulário em PDF.'); return; }
+    printWindow.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Orçamento ${escapeQuote(q.number)} — RDGLOGEXPRESS</title><style>
+      @page{size:A4;margin:14mm}*{box-sizing:border-box}body{margin:0;background:#f5f8fb;color:#17324d;font:14px Arial,sans-serif}main{max-width:800px;margin:auto;background:#fff;padding:34px;border:1px solid #d7e2e9;border-radius:14px}.head{display:flex;justify-content:space-between;gap:20px;border-bottom:4px solid #d8870b;padding-bottom:16px}.brand{font-size:24px;font-weight:800}.brand b{color:#d8870b}.tag{font-size:11px;color:#d8870b;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:right}.muted{color:#5e7386;font-size:12px}.section{margin-top:18px;border:1px solid #d7e2e9;border-radius:10px;padding:15px}.section h2{margin:0 0 12px;color:#d8870b;font-size:12px;text-transform:uppercase;letter-spacing:1px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field strong{display:block;font-size:11px;color:#5e7386;text-transform:uppercase;margin-bottom:4px}.route{display:grid;grid-template-columns:1fr 1fr;gap:16px}.route strong{display:block;color:#5e7386;font-size:11px;text-transform:uppercase;margin-bottom:5px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.money{background:#fff3d6;border-color:#d8870b}.total{font-size:24px;color:#b86b00;font-weight:800}.footer{margin-top:22px;padding-top:12px;border-top:1px solid #d7e2e9;text-align:center;color:#168b62;font-weight:700;font-size:12px}ul{margin:6px 0 0;padding-left:18px}@media print{body{background:#fff}main{border:0;padding:0}}
+    </style></head><body><main><div class="head"><div><div class="brand"><b>RDG</b>LOGEXPRESS</div><div class="muted">LOGÍSTICA E ENTREGAS RÁPIDAS</div></div><div><div class="tag">Orçamento comercial</div><div class="muted">${escapeQuote(q.number)}<br>Emissão: ${escapeQuote(q.date)}</div></div></div><div class="section"><h2>Dados do serviço</h2><div class="grid"><div class="field"><strong>Veículo</strong>${escapeQuote(q.vehicle)}</div><div class="field"><strong>Pagamento</strong>${escapeQuote(q.payment)}</div><div class="field"><strong>Urgente</strong>${escapeQuote(q.urgent)}</div><div class="field"><strong>Agendamento</strong>${escapeQuote(q.scheduled)}</div></div></div><div class="section"><h2>Resumo da rota</h2><div class="route"><div><strong>Coleta</strong>${escapeQuote(q.origin)}</div><div><strong>Entrega</strong>${escapeQuote(q.destination)}</div></div><div class="summary"><div><strong>Distância</strong><br>${escapeQuote(q.distance)}</div><div><strong>Peso</strong><br>${escapeQuote(q.weight)}</div><div><strong>Paradas</strong><br><ul>${stops}</ul></div></div></div><div class="section money"><h2>Valor estimado</h2><div class="total">${escapeQuote(q.total)}</div><div class="muted">O valor final será confirmado pela RDGLOGEXPRESS antes da coleta.</div></div><div class="section"><h2>Condições comerciais</h2><div class="muted">Este formulário registra a solicitação inicial. Para clientes fixos, o faturamento depende de cadastro e aprovação comercial prévia. Mercadorias devem estar embaladas e identificadas pelo contratante.</div></div><div class="footer">RDGLOGEXPRESS · (11) 92139-8732 · marques.dev01@outlook.com</div></main><script>window.onload=function(){window.print()}<\/script></body></html>`);
+    printWindow.document.close();
+  }
+  document.getElementById('btn-pdf-orcamento').addEventListener('click', openQuotePrint);
+
+  // ADMIN MODAL LOGIC
+  var overlay = document.getElementById('admin-overlay');
+  var trigger = document.getElementById('admin-trigger');
+  var loginView = document.getElementById('admin-login-view');
+  var ratesView = document.getElementById('admin-rates-view');
+  var passInput = document.getElementById('admin-pass');
+  var errorMsg = document.getElementById('admin-error');
+  var savedMsg = document.getElementById('admin-saved-msg');
+
+  function openModal(){
+    overlay.classList.add('show');
+    loginView.style.display = 'block';
+    ratesView.style.display = 'none';
+    errorMsg.classList.remove('show');
+    passInput.value = '';
+    setTimeout(function(){ passInput.focus(); }, 50);
+  }
+  function closeModal(){ overlay.classList.remove('show'); }
+
+  function fillRatesForm(){
+    var r = getRates();
+    document.getElementById('r-fixa-moto').value = r.moto.fixa;
+    document.getElementById('r-km-moto').value = r.moto.kmAte50;
+    document.getElementById('r-km-moto-acima').value = r.moto.kmAcima50;
+    document.getElementById('r-min-moto').value = r.moto.minimo;
+    document.getElementById('r-peso-limite').value = r.moto.pesoLimite;
+    document.getElementById('r-peso-adicional').value = r.moto.pesoAdicional;
+
+    document.getElementById('r-fixa-carro').value = r.carro.fixa;
+    document.getElementById('r-km-carro').value = r.carro.kmAte50;
+    document.getElementById('r-km-carro-acima').value = r.carro.kmAcima50;
+    document.getElementById('r-min-carro').value = r.carro.minimo;
+
+    document.getElementById('r-urgente').value = r.urgente;
+    document.getElementById('r-agendada').value = r.agendada;
+    document.getElementById('r-parada').value = r.parada;
+  }
+
+  var adminModeTabs = document.querySelectorAll('#admin-mode-tabs .mode-tab');
+  var adminRatesMoto = document.getElementById('admin-rates-moto');
+  var adminRatesCarro = document.getElementById('admin-rates-carro');
+  Array.prototype.forEach.call(adminModeTabs, function(tab){
+    tab.addEventListener('click', function(){
+      var m = tab.getAttribute('data-admin-mode');
+      Array.prototype.forEach.call(adminModeTabs, function(t){ t.classList.toggle('active', t === tab); });
+      adminRatesMoto.style.display = m === 'moto' ? 'block' : 'none';
+      adminRatesCarro.style.display = m === 'carro' ? 'block' : 'none';
+    });
+  });
+
+  trigger.addEventListener('click', openModal);
+  document.getElementById('admin-close-1').addEventListener('click', closeModal);
+  document.getElementById('admin-close-2').addEventListener('click', closeModal);
+  document.getElementById('admin-cancel-1').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+
+  document.getElementById('admin-login-btn').addEventListener('click', function(){
+    if(passInput.value === ADMIN_PASSWORD){
+      loginView.style.display = 'none';
+      ratesView.style.display = 'block';
+      fillRatesForm();
+    }else{
+      errorMsg.classList.add('show');
+    }
+  });
+
+  document.getElementById('admin-save-btn').addEventListener('click', function(){
+    var r = {
+      moto: {
+        fixa: parseFloat(document.getElementById('r-fixa-moto').value) || 0,
+        kmAte50: parseFloat(document.getElementById('r-km-moto').value) || 0,
+        kmAcima50: parseFloat(document.getElementById('r-km-moto-acima').value) || 0,
+        minimo: parseFloat(document.getElementById('r-min-moto').value) || 0,
+        pesoLimite: parseFloat(document.getElementById('r-peso-limite').value) || 0,
+        pesoAdicional: parseFloat(document.getElementById('r-peso-adicional').value) || 0
+      },
+      carro: {
+        fixa: parseFloat(document.getElementById('r-fixa-carro').value) || 0,
+        kmAte50: parseFloat(document.getElementById('r-km-carro').value) || 0,
+        kmAcima50: parseFloat(document.getElementById('r-km-carro-acima').value) || 0,
+        minimo: parseFloat(document.getElementById('r-min-carro').value) || 0
+      },
+      urgente: parseFloat(document.getElementById('r-urgente').value) || 0,
+      agendada: parseFloat(document.getElementById('r-agendada').value) || 0,
+      parada: parseFloat(document.getElementById('r-parada').value) || 0
+    };
+    setRates(r);
+    savedMsg.classList.add('show');
+    setTimeout(function(){ savedMsg.classList.remove('show'); }, 2000);
+  });
+
+  document.getElementById('admin-restore-btn').addEventListener('click', function(){
+    setRates(DEFAULT_RATES);
+    fillRatesForm();
+    savedMsg.classList.add('show');
+    setTimeout(function(){ savedMsg.classList.remove('show'); }, 2000);
+  });
+
+  document.getElementById('admin-logout-btn').addEventListener('click', closeModal);
+
+})();
+</script>
+
+</body>
+</html>
